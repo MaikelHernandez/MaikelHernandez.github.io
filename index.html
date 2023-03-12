@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Lista de Contactos</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="main.css">
+        <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        
+        <div class = "main-container">
+            <!-- Registro del contacto -->
+            <div class = "registro-contacto">
+                <h2>Detalles del Contacto</h2>
+                <div class = "formulario">
+                    <form>
+                        <label for = "name">Nombre</label>
+                        <input type = "text" id = "nombre">
+
+                        <label for = "address">Direccion</label>
+                        <input type = "text" id = "direccion">
+
+                        <label for = "contact-num">Numero Telefonico</label>
+                        <input type = "text" id = "numero-del-contacto">
+                    </form>
+
+                    <!-- mensaje de alarta -->
+                    <span class = "message"></span>
+
+                    <div class = "input-btns">
+                        <button type = "submit" id = "enviar-btn">
+                            <span>
+                                <i class = "fas fa-plus"></i>
+                            </span> Agregar Contacto
+                        </button>
+
+                        <button type = "button" id = "cancelar-btn">
+                            <span>
+                                <i class = "fas fa-times"></i>
+                            </span> cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- visualizacion del registro -->
+            <div class = "visualizacion-registro">
+                <h2>Contactos Agregados: </h2>
+        
+                <div class = "record-container">
+                    <!-- single record -->
+                    <!--
+                    <div class = "record-item">
+                        <div class = "record-el">
+                            <span id = "labelling">Contact ID: </span>
+                            <span id = "contact-id-content">1</span>
+                        </div>
+                        <div class = "record-el">
+                            <span id = "labelling">Name: </span>
+                            <span id = "name-content">John Doe</span>
+                        </div>
+                        <div class = "record-el">
+                            <span id = "labelling">Address: </span>
+                            <span id = "address-content">Ohio</span>
+                        </div>
+                        <div class = "record-el">
+                            <span id = "labelling">Contact Number: </span>
+                            <span id = "contact-num-content">123-456-7890</span>
+                        </div>
+                        <button type = "button" id = "delete-btn">
+                            <span>
+                                <i class = "fas fa-trash"></i>
+                            </span> Delete
+                        </button>
+                    </div>
+                    -->
+                    <!-- end of single record -->
+                </div>
+            </div>
+        </div>
+        
+
+        
+        <script src = "script.js"></script>
+    </body>
+</html>
+
