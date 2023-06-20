@@ -14,7 +14,7 @@ body{
     padding: 25px;
     border-radius: 5px;
 }
-.registro-contacto, .visualizacion-registro{
+.record-input, .record-display{
     border-radius: 10px;
     padding: 20px 0;
     margin: 30px 0;
@@ -22,24 +22,24 @@ body{
     -webkit-box-shadow: 0px 0px 6px 0px rgba(8, 0, 8, 1);
     -moz-box-shadow: 0px 0px 6px 0px rgba(8, 0, 8, 1);
 }
-.registro-contacto > h2, .visualizacion-registro > h2{
+.record-input > h2, .record-display > h2{
     padding: 10px 0;
     text-align: center;
     font-size: 22px;
 }
-.registro-contacto{
+.record-input{
     color: #000;
     background: #f0f0f0;
 }
-.visualizacion-registro{
+.record-display{
     background: #e52165;
     color: #fff;
     position: relative;
 }
 
 
-
-.formulario{
+/** record input **/
+.entry-form{
     padding: 10px 0;
 }
  form{
@@ -83,6 +83,7 @@ body{
      visibility: hidden;
  }
 
+ /******* alert types *****/
  .error{
      background: #f32013;
      visibility: visible;
@@ -92,19 +93,12 @@ body{
      visibility: visible!important;
  }
 
- .incorrect{
-outline: 20px solid #f32013;
- }
-
- .correct{
-    outline: 20px solid #4bb543;
- }
-
  /**********************************************/
  .input-btns{
      text-align: center;
  }
 
+ /*** utility button styling ***/
  button{
      display: block;
      width: 160px;
@@ -127,7 +121,7 @@ outline: 20px solid #f32013;
      opacity: 1;
  }
 
- #enviar-btn span, #cancelar-btn span{
+ #submit-btn span, #cancel-btn span{
      padding-right: 5px;
  }
 
@@ -139,11 +133,9 @@ outline: 20px solid #f32013;
  }
 
  /*****************************************/
- .visualizacion-registro{
+ .record-display{
      padding: 30px 40px;
  }
-
-
  .record-el{
      display: block;
      padding: 4px 0;
@@ -162,8 +154,8 @@ outline: 20px solid #f32013;
      background: #fff;
      box-shadow: 0 0 6px #777;
  }
- 
- #borrar-btn span{
+
+ #delete-btn span{
      padding-right: 5px;
  }
 
@@ -176,7 +168,7 @@ outline: 20px solid #f32013;
          width: 90vw;
          grid-column-gap: 30px;
      }
-     .registro-contacto{
+     .record-input{
          height: 700px;
      }
      .record-container{

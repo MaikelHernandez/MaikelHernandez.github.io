@@ -1,23 +1,21 @@
 
 
-const addBtn = document.getElementById('enviar-btn');
-const cancelBtn = document.getElementById('cancelar-btn');
+const addBtn = document.getElementById('submit-btn');
+const cancelBtn = document.getElementById('cancel-btn');
 const resetBtn = document.getElementById('reset-btn');
 const recordContainer = document.querySelector('.record-container');
-const deleteBtn = document.getElementById('borrar-btn');
-const editBtn = document.getElementById('editar-btn');
-const paragraph = document.getElementById("edit");
-const edit_button = document.getElementById("editar-btn");
-const end_button = document.getElementById("end-editing");
+const deleteBtn = document.getElementById('delete-btn');
+
 /************************************************ */
-const name = document.getElementById('nombre');
-const address = document.getElementById('direccion');
-const number = document.getElementById('numero-del-contacto');
+const name = document.getElementById('name');
+const address = document.getElementById('address');
+const number = document.getElementById('contact-num');
 
 let ContactArray = [];
 let id = 0;
 
 
+// Object constructor for Contact
 function Contact(id, name, address, number){
     this.id = id;
     this.name = name;
@@ -25,6 +23,7 @@ function Contact(id, name, address, number){
     this.number = number;
 }
 
+// Display available record
 document.addEventListener('DOMContentLoaded', function(){
     if(localStorage.getItem('contacts') == null){
         ContactArray = [];
@@ -35,12 +34,14 @@ document.addEventListener('DOMContentLoaded', function(){
     displayRecord();
 });
 
+// Display Function
 function displayRecord(){
     ContactArray.forEach(function(singleContact){
         addToList(singleContact);
     });
 }
 
+// Finding the last id
 function lastID(ContactArray){
     if(ContactArray.length > 0){
         id = ContactArray[ContactArray.length - 1].id;
@@ -49,87 +50,84 @@ function lastID(ContactArray){
     }
 }
 
+// Adding contact record
 
 addBtn.addEventListener('click', function(){
     if(checkInputFields([name, address, number])){
-        setMessage("Contacto Agregado!");
+        setMessage("success", "Record added successfully!");
         id++;
         const contact = new Contact(id, name.value, address.value, number.value);
         ContactArray.push(contact);
-        
+        // Storing contact record in local storage
         localStorage.setItem('contacts', JSON.stringify(ContactArray));
         clearInputFields();
 
+        // Adding to list
         addToList(contact);
     } else {
-        setMessage("error", "campos de entrada vacios o numero telefonico no valido!");
+        setMessage("error", "Empty input fields or invalid input!");
     }
     
 });
 
-
+// Adding to List (on the DOM)
     function addToList(item){
         const newRecordDiv = document.createElement('div');
         newRecordDiv.classList.add('record-item');
         newRecordDiv.innerHTML = `
         <div class = "record-el">
-            <span id = "labelling">ID del Contacto: </span>
+            <span id = "labelling">Contact ID: </span>
             <span id = "contact-id-content">${item.id}</span>
         </div>
 
         <div class = "record-el">
-            <span id = "labelling">Nombre: </span>
+            <span id = "labelling">Name: </span>
             <span id = "name-content">${item.name}</span>
         </div>
 
         <div class = "record-el">
-            <span id = "labelling">Direccion: </span>
+            <span id = "labelling">Address: </span>
             <span id = "address-content">${item.address}</span>
         </div>
 
         <div class = "record-el">
-            <span id = "labelling">Numero Telefonico: </span>
+            <span id = "labelling">Contact Number: </span>
             <span id = "contact-num-content">${item.number}</span>
         </div>
 
         <button type = "button" id = "delete-btn">
             <span>
                 <i class = "fas fa-trash"></i>
-            </span> borrar
-        </button>
-
-        <button type="submit" id="editar-btn">
-           <span>
-             <i class = "fas fa-Fixed"></i>
-           </span> editar 
+            </span> Delete
         </button>
         `;
         recordContainer.appendChild(newRecordDiv);
     }
 
-
+// Deletion of record
 recordContainer.addEventListener('click', function(event){
-
+    //console.log(event.target);
     if(event.target.id === 'delete-btn'){
-      
+        // removing from DOM
         let recordItem = event.target.parentElement;
         recordContainer.removeChild(recordItem);
         let tempContactList = ContactArray.filter(function(record){
             return (record.id !== parseInt(recordItem.firstElementChild.lastElementChild.textContent));
         });
         ContactArray = tempContactList;
-     
+        //removing from localstorage by overwriting
         localStorage.setItem('contacts', JSON.stringify(ContactArray));
     }
 });
 
-
+// resetting everything (id will get set to 0)
 resetBtn.addEventListener('click', function(){
     ContactArray = [];
     localStorage.setItem('contacts', JSON.stringify(ContactArray));
     location.reload();
 })
 
+// Displaying status/alerts
 function setMessage(status, message){
     let messageBox = document.querySelector('.message');
     if(status == "error"){
@@ -144,15 +142,7 @@ function setMessage(status, message){
     }
 }
 
-edit_button.addEventListener("click", function() {
-    paragraph.contentEditable = true;
-  } );
-  
-  end_button.addEventListener("click", function() {
-    paragraph.contentEditable = false;
-  } )
-
-
+// Clearing all input fields
 cancelBtn.addEventListener('click', function(){
     clearInputFields();
 });
@@ -163,15 +153,14 @@ function clearInputFields(){
     number.value = "";
 }
 
-
-
+// Removing status/alerts
 function removeMessage(status, messageBox){
     setTimeout(function(){
         messageBox.classList.remove(`${status}`);
     }, 2000);
 }
 
-
+// Input field validation
 function checkInputFields(inputArr){
     for(let i = 0; i < inputArr.length; i++){
         if(inputArr[i].value === ""){
@@ -184,9 +173,9 @@ function checkInputFields(inputArr){
     return true;
 }
 
-
+// Phone number validation function 
 function phoneNumCheck(inputtxt){
-    let phoneNo = /^\(?([0-9]{4})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+    let phoneNo = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
     if(inputtxt.match(phoneNo)){
         return true;
     } else {
@@ -194,3 +183,7 @@ function phoneNumCheck(inputtxt){
     }
 }
 
+// Works for the following formats: 
+// XXX-XXX-XXXX
+// XXX.XXX.XXXX
+// XXX XXX XXXX
